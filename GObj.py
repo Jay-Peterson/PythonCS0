@@ -109,8 +109,8 @@ class GComp(GObj):
             obj.setVisible(self.visible)
 
     def getWidth(self):
-        maxX = 0
-        minX = 0 #minimums used to be set ludicrously high. Now they're 0, so that no matter what, the origin point is included in width and height calculations.
+        maxX = -10000 #updated 4/3/2017: maximum/minimum is now arbitrarily large. It used to be that max and min were both 0, i don't remember why.
+        minX = 10000 
         for obj in self.objs:
             min, max = obj._getBox()
             if max[0] >= maxX:
@@ -120,8 +120,8 @@ class GComp(GObj):
         return maxX-minX
 
     def getHeight(self):
-        maxY = 0
-        minY = 0 #As a bonus? No more negative width/height readings from empty gcompounds.
+        maxY = -10000
+        minY = 10000 #As a bonus? No more negative width/height readings from empty gcompounds. OLD COMMENT for using min0, max0.
         for obj in self.objs:
             min, max = obj._getBox()
             if max[1] >= maxY:
@@ -149,8 +149,8 @@ class GComp(GObj):
 
     def _getBox(self):
 
-        maxX = 0
-        maxY = 0
+        maxX = -10000 #updated 4/3/2017 to account for negative values. Offscreen stuff...
+        maxY = -10000
         minX = 10000
         minY = 10000
         for obj in self.objs:
